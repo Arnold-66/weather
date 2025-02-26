@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #212121;
+            color: white;
+        }
+
+        .card {
+            background-color: #333;
+            border-radius: 15px;
+        }
+
+        .card-body {
+            color: white;
+        }
+
+        .container {
+            padding-top: 50px;
+        }
+
+        .d-flex {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .display-4 {
+            font-size: 4rem;
+        }
+
+        .daily-summary {
+            margin-top: 20px;
+        }
+
+        .daily-summary div {
+            margin-bottom: 10px;
+        }
+
+        .weather-icon {
+            width: 80px;
+            height: 80px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="row d-flex justify-content-center py-5">
+            <div class="col-md-10 col-lg-8 col-xl-6">
+                <div class="card text-body">
+                    <div class="card-body p-4">
+                        <!-- City and Current Time -->
+                        <div class="d-flex">
+                            <h6 class="flex-grow-1">{{ city }}</h6>
+                            <h6>{{ current_time }}</h6>
+                        </div>
+    
+                        <!-- Current Weather -->
+                        <div class="text-center mt-5 mb-4">
+                            <h6 class="display-4 mb-0 font-weight-bold">{{ temperature }}°C</h6>
+                            <span class="small" style="color: #868B94">{{ condition }}</span>
+                        </div>
+    
+                        <!-- Wind, Cloud Cover, etc. -->
+                        <div class="d-flex align-items-center">
+                            <div class="flex-grow-1" style="font-size: 1rem;">
+                                <div><i class="fas fa-wind fa-fw" style="color: #868B94;"></i> <span class="ms-1">{{ wind_speed }} km/h</span></div>
+                                <div><i class="fas fa-tint fa-fw" style="color: #868B94;"></i> <span class="ms-1">{{ humidity }}%</span></div>
+                                <div><i class="fas fa-sun fa-fw" style="color: #868B94;"></i> <span class="ms-1">{{ sunshine_hours }}h</span></div>
+                            </div>
+
+                            <!-- Weather Icon -->
+                            <img class="weather-icon" src="{{ icon_url }}" alt="Weather Icon">
+                        </div>
+    
+                        <!-- Daily Forecast -->
+                        <div class="daily-summary mt-4">
+                            <h5 class="mb-3">Daily Forecast:</h5>
+                            <div class="card">
+                                <div class="card-body">
+                                    {% for day in daily_summary %}
+                                        <div class="row mb-2">
+                                            <div class="col-6">
+                                                <strong>{{ day.day }}</strong>
+                                            </div>
+                                            <div class="col-6 text-end">
+                                                <span class="text-muted">{{ day.summary }}</span><br>
+                                                <span class="font-weight-bold">{{ day.temperature_min }}°C - {{ day.temperature_max }}°C</span>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
