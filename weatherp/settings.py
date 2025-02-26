@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
+import os
 
 from pathlib import Path
 
@@ -81,8 +82,9 @@ WSGI_APPLICATION = 'weatherp.wsgi.application'
    #     'NAME': BASE_DIR / 'db.sqlite3',
     #}
 #}
+import dj_database_url
 DATABASES = {
-    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+    'default': dj_database_url.config(default=os.getenv('postgres://u8ad8k37qtqkh3:p11d1d71444d467b6ac749430aceac7e3d06218624e5d44ddd170f8336d6fa3c1@cc0gj7hsrh0ht8.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/de1cg9dqffht00 '))
 }
 
 
@@ -129,8 +131,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
-import dj_database_url
-import os
+
 
 ALLOWED_HOSTS = ["weather1.herokuapp.com"]
 
